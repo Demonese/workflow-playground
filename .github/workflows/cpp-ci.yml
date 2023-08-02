@@ -55,3 +55,6 @@ jobs:
       
       - name: CMake build
         run: cmake --build build --target main --config Release
+        
+      - name: Test
+        run: build/bin/main.exe
