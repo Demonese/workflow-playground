@@ -58,3 +58,11 @@ jobs:
         
       - name: Test
         run: build/bin/main.exe
+        
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: bin
+          path: |
+            build/bin
+          retention-days: 7
