@@ -41,3 +41,13 @@ target_link_libraries(main
 PRIVATE
     nlohmann_json
 )
+
+function(copy_to_binary_directory __TARGET__)
+    add_custom_command(TARGET ${__TARGET__} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/bin
+        COMMAND ${CMAKE_COMMAND} -E rm -f ${CMAKE_BINARY_DIR}/bin/"$<TARGET_FILE_NAME:${__TARGET__}>"
+        COMMAND ${CMAKE_COMMAND} -E copy  "$<TARGET_FILE:${__TARGET__}>" ${CMAKE_BINARY_DIR}/bin
+    )
+endfunction()
+
+copy_to_binary_directory(main)
